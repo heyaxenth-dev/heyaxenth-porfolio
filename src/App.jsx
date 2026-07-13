@@ -517,10 +517,7 @@ export default function App() {
 
 						<div style={{ paddingTop: '1rem' }}>
 							{[
-								[
-									'Previously',
-									"Information Technologist @ Provincial Gov't of Antique",
-								],
+								['Previously', "IT Programmer I @ Provincial Gov't of Antique"],
 								[
 									'Approach',
 									'OOP principles, clean UI, and thorough testing — always.',
