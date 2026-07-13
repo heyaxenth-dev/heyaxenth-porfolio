@@ -5,8 +5,8 @@ const NAV_LINKS = ['About', 'Projects', 'Stack', 'Contact'];
 const PROJECTS = [
 	{
 		id: 1,
-		year: '2024',
-		title: 'Remote Sens',
+		year: '2026',
+		title: 'Remote-Sensing App',
 		desc: 'React Native mobile app using geospatial analysis to assess land areas and generate data-driven tree replantation suggestions. Integrated Python-based analysis with real-time weather and environmental factors to monitor growth and produce success rate reports.',
 		tags: ['React Native', 'Python', 'Geospatial', 'Weather API'],
 		href: 'https://github.com/heyaxenth-dev',
