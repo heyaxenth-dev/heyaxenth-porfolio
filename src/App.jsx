@@ -5,8 +5,8 @@ const NAV_LINKS = ['About', 'Projects', 'Stack', 'Contact'];
 const PROJECTS = [
 	{
 		id: 1,
-		year: '2026',
-		title: 'Remote-Sensing App',
+		year: '2024',
+		title: 'Remote Sens',
 		desc: 'React Native mobile app using geospatial analysis to assess land areas and generate data-driven tree replantation suggestions. Integrated Python-based analysis with real-time weather and environmental factors to monitor growth and produce success rate reports.',
 		tags: ['React Native', 'Python', 'Geospatial', 'Weather API'],
 		href: 'https://github.com/heyaxenth-dev',
@@ -367,7 +367,7 @@ export default function App() {
 							textTransform: 'uppercase',
 							marginBottom: '2rem',
 						}}>
-						Software Engineer & Web Developer — Est. 2019
+						Software Engineer & Web Developer — Available for hire
 					</p>
 					<h1
 						style={{
@@ -518,7 +518,7 @@ export default function App() {
 						<div style={{ paddingTop: '1rem' }}>
 							{[
 								[
-									'Currently',
+									'Previously',
 									"Information Technologist @ Provincial Gov't of Antique",
 								],
 								[
@@ -894,7 +894,7 @@ export default function App() {
 								{[
 									['Email', 'hyacynth.dev@gmail.com'],
 									['Phone', '(0965) 116 8472'],
-									['GitHub', 'github.com/heyaxenth-dev'],
+									['GitHub', 'github.com/heyaxenthdev'],
 								].map(([k, v]) => (
 									<div
 										key={k}
