@@ -6,34 +6,44 @@ const PROJECTS = [
 	{
 		id: 1,
 		year: '2024',
-		title: "Provincial Gov't of Antique — Web Systems",
-		desc: 'Developed and maintained web-based applications to enhance internal and public services, streamlining operations and improving cross-department workflows.',
-		tags: ['React', 'PHP', 'MySQL', 'API Integration'],
-		href: '#',
+		title: 'Remote Sens',
+		desc: 'React Native mobile app using geospatial analysis to assess land areas and generate data-driven tree replantation suggestions. Integrated Python-based analysis with real-time weather and environmental factors to monitor growth and produce success rate reports.',
+		tags: ['React Native', 'Python', 'Geospatial', 'Weather API'],
+		href: 'https://github.com/heyaxenth-dev',
+		images: [],
+		wip: true,
 	},
 	{
 		id: 2,
-		year: '2023',
-		title: 'Scancyp Ltd. — UI/Dev',
-		desc: 'Designed and developed responsive web interfaces for a Cyprus-based company. Optimized load times by ~30% and integrated third-party APIs to extend platform functionality.',
-		tags: ['UI/UX', 'Figma', 'JavaScript', 'API Integration'],
-		href: '#',
+		year: '2024',
+		title: 'GrowCalendar',
+		desc: 'Smart farming app that recommends crops to farmers based on real-time weather, soil, and environmental factors. Features a feedback tracking system that continuously re-learns from farmer outcomes to improve future recommendations.',
+		tags: ['React', 'Python', 'Data Re-learning', 'Weather API'],
+		href: 'https://github.com/heyaxenth-dev',
+		images: [
+			'/images/growcalendar-1.png',
+			'/images/growcalendar-2.png',
+			'/images/growcalendar-3.png',
+			'/images/growcalendar-4.png',
+		],
+		wip: false,
 	},
 	{
 		id: 3,
 		year: '2023',
-		title: 'Freelance Web Projects',
-		desc: 'Built responsive websites for various clients, implementing APIs for third-party integrations and conducting user testing to drive iterative improvements.',
-		tags: ['Next.js', 'React', 'Tailwind CSS', 'WordPress'],
-		href: '#',
-	},
-	{
-		id: 4,
-		year: '2019',
-		title: 'BJMP Monitoring System',
-		desc: 'Built a full-stack web application for the Bureau of Jail Management and Penology with online document requests, SMS notification API, and SEO strategies that boosted traffic by ~25%.',
+		title: 'BILLFrozen',
+		desc: 'Full-stack ordering and inventory management system for a frozen goods business. Retailers can place and track orders through a responsive web app with real-time SMS notifications for order status updates and communication.',
 		tags: ['PHP', 'MySQL', 'JavaScript', 'SMS API'],
-		href: '#',
+		href: 'https://github.com/heyaxenth-dev',
+		images: [
+			'/images/billfrozen-1.png',
+			'/images/billfrozen-2.png',
+			'/images/billfrozen-3.png',
+			'/images/billfrozen-4.png',
+			'/images/billfrozen-5.png',
+			'/images/billfrozen-6.png',
+		],
+		wip: false,
 	},
 ];
 
@@ -97,7 +107,7 @@ function FadeIn({ children, delay = 0, className = '' }) {
 
 export default function App() {
 	const [activeNav, setActiveNav] = useState('');
-	const [hoveredProject, setHoveredProject] = useState(null);
+	const [menuOpen, setMenuOpen] = useState(false);
 	const [formState, setFormState] = useState({
 		name: '',
 		email: '',
@@ -149,71 +159,186 @@ export default function App() {
 					left: 0,
 					right: 0,
 					zIndex: 100,
-					borderBottom: '1px solid #1e1e1e',
 					backdropFilter: 'blur(12px)',
 					background: 'rgba(13,13,13,0.88)',
-					display: 'flex',
-					alignItems: 'center',
-					justifyContent: 'space-between',
-					padding: '0 2rem',
-					height: '60px',
+					borderBottom: menuOpen ? 'none' : '1px solid #1e1e1e',
 				}}>
-				<span
+				{/* Main nav bar */}
+				<div
 					style={{
-						fontFamily: "'Playfair Display', Georgia, serif",
-						fontSize: '1.1rem',
-						letterSpacing: '0.02em',
-						color: '#f5f0e8',
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'space-between',
+						padding: '0 2rem',
+						height: '60px',
 					}}>
-					HCD<span style={{ color: '#c8ff00' }}>.</span>
-				</span>
+					<span
+						style={{
+							fontFamily: "'Playfair Display', Georgia, serif",
+							fontSize: '1.1rem',
+							letterSpacing: '0.02em',
+							color: '#f5f0e8',
+						}}>
+						HCD<span style={{ color: '#c8ff00' }}>.</span>
+					</span>
 
-				{/* Desktop links */}
-				<div style={{ display: 'flex', gap: '2rem' }} className="desktop-nav">
-					{NAV_LINKS.map((l) => (
+					{/* Desktop links */}
+					<div style={{ display: 'flex', gap: '2rem' }} className="desktop-nav">
+						{NAV_LINKS.map((l) => (
+							<button
+								key={l}
+								onClick={() => scrollTo(l)}
+								style={{
+									background: 'none',
+									border: 'none',
+									cursor: 'pointer',
+									fontSize: '0.75rem',
+									letterSpacing: '0.12em',
+									textTransform: 'uppercase',
+									color: activeNav === l ? '#c8ff00' : '#888',
+									transition: 'color 0.2s',
+								}}
+								onMouseEnter={(e) => {
+									if (activeNav !== l) e.target.style.color = '#e8e4dc';
+								}}
+								onMouseLeave={(e) => {
+									if (activeNav !== l) e.target.style.color = '#888';
+								}}>
+								{l}
+							</button>
+						))}
+					</div>
+
+					<div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
 						<button
-							key={l}
-							onClick={() => scrollTo(l)}
+							onClick={() => scrollTo('Contact')}
+							className="hire-btn"
 							style={{
+								background: '#c8ff00',
+								border: 'none',
+								cursor: 'pointer',
+								color: '#0d0d0d',
+								fontSize: '0.72rem',
+								letterSpacing: '0.1em',
+								textTransform: 'uppercase',
+								fontWeight: '700',
+								padding: '8px 18px',
+								borderRadius: '2px',
+								transition: 'opacity 0.2s',
+							}}
+							onMouseEnter={(e) => (e.target.style.opacity = '0.85')}
+							onMouseLeave={(e) => (e.target.style.opacity = '1')}>
+							Hire me
+						</button>
+
+						{/* Hamburger — mobile only */}
+						<button
+							className="hamburger"
+							onClick={() => setMenuOpen((o) => !o)}
+							aria-label="Toggle menu"
+							style={{
+								display: 'none',
 								background: 'none',
 								border: 'none',
 								cursor: 'pointer',
-								fontSize: '0.75rem',
-								letterSpacing: '0.12em',
-								textTransform: 'uppercase',
-								color: activeNav === l ? '#c8ff00' : '#888',
-								transition: 'color 0.2s',
-							}}
-							onMouseEnter={(e) => {
-								if (activeNav !== l) e.target.style.color = '#e8e4dc';
-							}}
-							onMouseLeave={(e) => {
-								if (activeNav !== l) e.target.style.color = '#888';
+								padding: '4px',
+								flexDirection: 'column',
+								gap: '5px',
 							}}>
-							{l}
+							<span
+								style={{
+									display: 'block',
+									width: '22px',
+									height: '2px',
+									background: '#e8e4dc',
+									transition: 'transform 0.3s, opacity 0.3s',
+									transform: menuOpen
+										? 'translateY(7px) rotate(45deg)'
+										: 'none',
+								}}
+							/>
+							<span
+								style={{
+									display: 'block',
+									width: '22px',
+									height: '2px',
+									background: '#e8e4dc',
+									transition: 'opacity 0.3s',
+									opacity: menuOpen ? 0 : 1,
+								}}
+							/>
+							<span
+								style={{
+									display: 'block',
+									width: '22px',
+									height: '2px',
+									background: '#e8e4dc',
+									transition: 'transform 0.3s, opacity 0.3s',
+									transform: menuOpen
+										? 'translateY(-7px) rotate(-45deg)'
+										: 'none',
+								}}
+							/>
 						</button>
-					))}
+					</div>
 				</div>
 
-				<button
-					onClick={() => scrollTo('Contact')}
+				{/* Mobile dropdown menu */}
+				<div
 					style={{
-						background: '#c8ff00',
-						border: 'none',
-						cursor: 'pointer',
-						color: '#0d0d0d',
-						fontSize: '0.72rem',
-						letterSpacing: '0.1em',
-						textTransform: 'uppercase',
-						fontWeight: '700',
-						padding: '8px 18px',
-						borderRadius: '2px',
-						transition: 'opacity 0.2s',
-					}}
-					onMouseEnter={(e) => (e.target.style.opacity = '0.85')}
-					onMouseLeave={(e) => (e.target.style.opacity = '1')}>
-					Hire me
-				</button>
+						overflow: 'hidden',
+						maxHeight: menuOpen ? '320px' : '0',
+						transition: 'max-height 0.35s ease',
+						borderBottom: menuOpen ? '1px solid #1e1e1e' : 'none',
+						background: 'rgba(13,13,13,0.97)',
+					}}>
+					<div
+						style={{
+							display: 'flex',
+							flexDirection: 'column',
+							padding: '1rem 2rem 1.5rem',
+						}}>
+						{NAV_LINKS.map((l) => (
+							<button
+								key={l}
+								onClick={() => scrollTo(l)}
+								style={{
+									background: 'none',
+									border: 'none',
+									cursor: 'pointer',
+									fontSize: '1.1rem',
+									letterSpacing: '0.08em',
+									textTransform: 'uppercase',
+									color: activeNav === l ? '#c8ff00' : '#888',
+									textAlign: 'left',
+									padding: '0.85rem 0',
+									borderBottom: '1px solid #1a1a1a',
+									fontFamily: "'DM Mono', monospace",
+									transition: 'color 0.2s',
+								}}>
+								{l}
+							</button>
+						))}
+						<button
+							onClick={() => scrollTo('Contact')}
+							style={{
+								background: '#c8ff00',
+								border: 'none',
+								cursor: 'pointer',
+								color: '#0d0d0d',
+								fontSize: '0.75rem',
+								letterSpacing: '0.1em',
+								textTransform: 'uppercase',
+								fontWeight: '700',
+								padding: '12px 18px',
+								borderRadius: '2px',
+								marginTop: '1rem',
+								fontFamily: "'DM Mono', monospace",
+							}}>
+							Hire me →
+						</button>
+					</div>
+				</div>
 			</nav>
 
 			{/* ── HERO ── */}
@@ -285,7 +410,7 @@ export default function App() {
 					</p>
 					<div style={{ display: 'flex', gap: '2rem' }}>
 						{[
-							['4+', 'Projects'],
+							['3+', 'Projects'],
 							['5+', 'Years'],
 							['NCIII', 'Certified'],
 						].map(([n, l]) => (
@@ -470,87 +595,174 @@ export default function App() {
 				{PROJECTS.map((p, i) => (
 					<FadeIn key={p.id} delay={i * 0.08}>
 						<div
-							onMouseEnter={() => setHoveredProject(p.id)}
-							onMouseLeave={() => setHoveredProject(null)}
 							style={{
 								borderBottom: '1px solid #1e1e1e',
-								padding: '2rem 0',
-								cursor: 'pointer',
-								display: 'grid',
-								gridTemplateColumns: '80px 1fr auto',
-								gap: '2rem',
-								alignItems: 'center',
-								transition: 'background 0.2s',
-								background: hoveredProject === p.id ? '#111' : 'transparent',
-								borderRadius: '4px',
-								paddingLeft: hoveredProject === p.id ? '1rem' : '0',
-								paddingRight: hoveredProject === p.id ? '1rem' : '0',
+								padding: '2.5rem 0',
 							}}>
-							<span
+							{/* Top row */}
+							<div
 								style={{
-									fontSize: '0.7rem',
-									color: '#444',
-									letterSpacing: '0.1em',
-									fontFamily: 'monospace',
+									display: 'grid',
+									gridTemplateColumns: '80px 1fr auto',
+									gap: '2rem',
+									alignItems: 'flex-start',
+									marginBottom: p.images.length > 0 || p.wip ? '1.5rem' : '0',
 								}}>
-								{p.year}
-							</span>
-							<div>
-								<div
+								<span
 									style={{
-										display: 'flex',
-										alignItems: 'center',
-										gap: '1rem',
-										marginBottom: '0.5rem',
+										fontSize: '0.7rem',
+										color: '#444',
+										letterSpacing: '0.1em',
+										fontFamily: 'monospace',
+										paddingTop: '4px',
 									}}>
-									<span
-										style={{
-											fontFamily: "'Playfair Display', serif",
-											fontSize: '1.3rem',
-											color: '#f5f0e8',
-										}}>
-										{p.title}
-									</span>
+									{p.year}
+								</span>
+								<div>
 									<div
 										style={{
 											display: 'flex',
-											gap: '0.5rem',
+											alignItems: 'center',
+											gap: '1rem',
+											marginBottom: '0.6rem',
 											flexWrap: 'wrap',
 										}}>
-										{p.tags.map((t) => (
+										<span
+											style={{
+												fontFamily: "'Playfair Display', serif",
+												fontSize: '1.3rem',
+												color: '#f5f0e8',
+											}}>
+											{p.title}
+										</span>
+										{p.wip && (
 											<span
-												key={t}
 												style={{
-													fontSize: '0.65rem',
-													letterSpacing: '0.1em',
+													fontSize: '0.6rem',
+													letterSpacing: '0.12em',
 													textTransform: 'uppercase',
-													color: '#555',
-													border: '1px solid #222',
+													color: '#c8ff00',
+													border: '1px solid #c8ff00',
 													padding: '2px 8px',
 													borderRadius: '2px',
 												}}>
-												{t}
+												In Progress
 											</span>
-										))}
+										)}
+										<div
+											style={{
+												display: 'flex',
+												gap: '0.5rem',
+												flexWrap: 'wrap',
+											}}>
+											{p.tags.map((t) => (
+												<span
+													key={t}
+													style={{
+														fontSize: '0.65rem',
+														letterSpacing: '0.1em',
+														textTransform: 'uppercase',
+														color: '#555',
+														border: '1px solid #222',
+														padding: '2px 8px',
+														borderRadius: '2px',
+													}}>
+													{t}
+												</span>
+											))}
+										</div>
 									</div>
+									<p
+										style={{
+											fontSize: '0.85rem',
+											color: '#666',
+											margin: 0,
+											lineHeight: 1.7,
+										}}>
+										{p.desc}
+									</p>
 								</div>
-								<p style={{ fontSize: '0.85rem', color: '#666', margin: 0 }}>
-									{p.desc}
-								</p>
+								<a
+									href={p.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									style={{
+										fontSize: '1.2rem',
+										color: '#333',
+										transition: 'color 0.2s',
+										textDecoration: 'none',
+									}}
+									onMouseEnter={(e) => (e.target.style.color = '#c8ff00')}
+									onMouseLeave={(e) => (e.target.style.color = '#333')}>
+									→
+								</a>
 							</div>
-							<span
-								style={{
-									fontSize: '1.2rem',
-									color: hoveredProject === p.id ? '#c8ff00' : '#333',
-									transition: 'color 0.2s, transform 0.2s',
-									transform:
-										hoveredProject === p.id
-											? 'translateX(4px) rotate(-45deg)'
-											: 'none',
-									display: 'inline-block',
-								}}>
-								→
-							</span>
+
+							{/* Image strip */}
+							{p.wip ? (
+								<div
+									style={{
+										marginLeft: 'calc(80px + 2rem)',
+										height: '160px',
+										border: '1px dashed #222',
+										borderRadius: '6px',
+										display: 'flex',
+										alignItems: 'center',
+										justifyContent: 'center',
+										flexDirection: 'column',
+										gap: '0.5rem',
+										background: '#0a0a0a',
+									}}>
+									<span style={{ fontSize: '1.5rem' }}>🛰️</span>
+									<span
+										style={{
+											fontSize: '0.7rem',
+											letterSpacing: '0.15em',
+											textTransform: 'uppercase',
+											color: '#444',
+										}}>
+										Screenshots coming soon
+									</span>
+								</div>
+							) : p.images.length > 0 ? (
+								<div
+									style={{
+										marginLeft: 'calc(80px + 2rem)',
+										display: 'flex',
+										gap: '0.75rem',
+										overflowX: 'auto',
+										paddingBottom: '0.5rem',
+										scrollbarWidth: 'thin',
+										scrollbarColor: '#222 transparent',
+									}}>
+									{p.images.map((src, idx) => (
+										<img
+											key={idx}
+											src={src}
+											alt={`${p.title} screenshot ${idx + 1}`}
+											style={{
+												height: '160px',
+												width: 'auto',
+												minWidth: '240px',
+												objectFit: 'cover',
+												borderRadius: '6px',
+												border: '1px solid #1e1e1e',
+												flexShrink: 0,
+												transition: 'transform 0.2s, border-color 0.2s',
+												cursor: 'pointer',
+											}}
+											onMouseEnter={(e) => {
+												e.target.style.transform = 'scale(1.02)';
+												e.target.style.borderColor = '#c8ff00';
+											}}
+											onMouseLeave={(e) => {
+												e.target.style.transform = 'scale(1)';
+												e.target.style.borderColor = '#1e1e1e';
+											}}
+										/>
+									))}
+								</div>
+							) : null}
 						</div>
 					</FadeIn>
 				))}
@@ -879,6 +1091,8 @@ export default function App() {
         @keyframes pulse { 0%,100% { opacity:0.3 } 50% { opacity:1 } }
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
+          .hire-btn { display: none !important; }
+          .hamburger { display: flex !important; }
           [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; gap: 2rem !important; }
           [style*="grid-template-columns: 80px"] { grid-template-columns: 60px 1fr 24px !important; gap: 1rem !important; }
         }
